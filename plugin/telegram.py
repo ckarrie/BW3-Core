@@ -21,6 +21,7 @@ from plugin.pluginBase import PluginBase
 # Custom plugin includes #
 from telegram.error import (TelegramError, Unauthorized, BadRequest, TimedOut, NetworkError)
 from telegram.ext import messagequeue as mq
+from telegram.constants import PARSEMODE_MARKDOWN_V2
 from telegram.utils.request import Request
 import telegram.bot
 # ###################### #
@@ -106,7 +107,7 @@ class BoswatchPlugin(PluginBase):
             try:
                 # Send Message via Telegram
                 logging.info("Sending message to " + chatId)
-                self.bot.send_message(chat_id=chatId, text=message)
+                self.bot.send_message(chat_id=chatId, text=message, parse_mode=PARSEMODE_MARKDOWN_V2)
 
             except Unauthorized:
                 logging.exception("Error while sending Telegram Message, please Check your api-key")
